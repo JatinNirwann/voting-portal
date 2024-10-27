@@ -7,34 +7,39 @@
   <title>Voting Portal</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="index-page">
   <nav>
-    <div class="logo">Voting Portal</div>
-    <ul>
-      <li><a href="#">Login</a></li>
-      <li><a href="#">Register</a></li>
-    </ul>
+      <div class="logo">Voting Portal</div>
+      <ul>
+          <li><a href="index.html">Login</a></li>
+          <li><a href="registration.html">Register</a></li>
+      </ul>
   </nav>
 
   <div class="container">
-    <div class="welcome-text">
-      <h1>Welcome to the Voting Portal</h1>
-      <p>"The vote is precious. It is the most powerful non-violent tool we have in a democratic society." - John Lewis</p>
-    </div>
+      <div class="welcome-text">
+          <h1>Welcome to the Voting Portal</h1>
+          <p>"The vote is precious. It is the most powerful non-violent tool we have in a democratic society." - John Lewis</p>
+      </div>
 
-    <div class="login-form">
-      <h2>Login</h2>
-      <form action="#">
-        <label for="user-id">User ID</label>
-        <input type="text" id="user-id" placeholder="Enter your user ID" required>
+      <div class="login-form">
+          <h2>Login</h2>
+          <form action="#" method="POST">
+              <div class="input-container">
+                  <label for="userid">User ID</label>
+                  <input type="text" id="userid" name="userid" required>
+              </div>
+              
+              <div class="input-container">
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="password" required>
+              </div>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
-
-        <button type="submit">Login</button>
-      </form>
-      <p>Don't have an account? <a href="reigistration.html">Sign up</a></p>
-    </div>
+              <button type="submit">Login</button>
+              
+              <p>Don't have an account? <a href="registration.html">Sign up</a></p>
+          </form>
+      </div>
   </div>
 </body>
 </html>

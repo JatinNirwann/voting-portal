@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reigistration</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+ <body class="registration-page">
+      <nav>
+          <div class="logo">Voting Portal</div>
+          <ul>
+              <li><a href="index.html">Login</a></li>
+              <li><a href="registration.html">Register</a></li>
+          </ul>
+      </nav>
+  
+      <div class="registration-form">
+          <h2>Register</h2>
+          <form action="#" method="POST">
+              <div class="input-container">
+                  <label for="fullname">Full Name</label>
+                  <input type="text" id="fullname" name="fullname" required>
+              </div>
+              
+              <div class="input-container">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required>
+              </div>
+              
+              <div class="input-container">
+                  <label for="newpassword">Password</label>
+                  <input type="password" id="newpassword" name="newpassword" required>
+              </div>
+              
+              <div class="input-container">
+                  <label for="confirmpassword">Confirm Password</label>
+                  <input type="password" id="confirmpassword" name="confirmpassword" required>
+              </div>
+  
+              <button type="submit">Register</button>
+              
+              <p>Already have an account? <a href="index.html">Login</a></p>
+          </form>
+      </div>
+  </body>
+</html>

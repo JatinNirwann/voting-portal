@@ -4,10 +4,9 @@
   box-sizing: border-box;
 }
 
+/* Common Styles */
 body {
   font-family: Arial, sans-serif;
-  background: url(background.jpg);
-  background-size: cover;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,9 +15,23 @@ body {
   color: white;
 }
 
+/* Page-specific backgrounds */
+.index-page {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(background.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.registration-page {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(registration-page.png);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Navigation */
 nav {
-  background-color: #1f1f1f;
-  padding: 10px 20px;
+  background-color: rgba(31, 31, 31, 0.9);
+  padding: 15px 30px;
   position: fixed;
   top: 0;
   left: 0;
@@ -27,6 +40,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   z-index: 10;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 nav .logo {
@@ -42,125 +56,129 @@ nav ul {
 }
 
 nav ul li {
-  margin-right: 20px;
+  margin-left: 30px;
 }
 
 nav ul li a {
   text-decoration: none;
   color: white;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
+nav ul li a:hover {
+  color: #44bd32;
+}
+
+/* Container Layout */
 .container {
   display: flex;
   justify-content: space-between;
   width: 80%;
   max-width: 1200px;
-  margin-top: 100px;
+  margin-top: 80px;
+  gap: 50px;
 }
 
+/* Welcome Text */
 .welcome-text {
   width: 50%;
-  
 }
 
 .welcome-text h1 {
   font-size: 3em;
-  margin-bottom: 10px;
-  color: #1B2A4A;  
+  margin-bottom: 20px;
+  color: white;
 }
 
 .welcome-text p {
   font-size: 1.2em;
-  margin-bottom: 20px;
-  color: #14565B;
+  line-height: 1.6;
+  color: #f0f0f0;
 }
 
-
-.login-form {
-  background-color: #233c56;
-  padding: 30px;
+/* Form Styles */
+.login-form, .registration-form {
+  background-color: rgba(35, 60, 86, 0.95);
+  padding: 40px;
   border-radius: 15px;
-  width: 300px;
+  width: 400px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
 }
 
-.login-form h2 {
-  margin-bottom: 20px;
+.login-form:hover, .registration-form:hover {
+  transform: translateY(-5px);
+}
+
+.login-form h2, .registration-form h2 {
+  margin-bottom: 30px;
   color: white;
+  font-size: 2em;
 }
 
-.login-form label {
+.input-container {
+  margin-bottom: 20px;
+}
+
+.input-container label {
   display: block;
   text-align: left;
-  margin: 10px 0 5px;
+  margin-bottom: 8px;
   color: white;
+  font-weight: 500;
 }
 
-.login-form input {
+.input-container input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: none;
+  padding: 12px;
+  border: 2px solid transparent;
   border-radius: 8px;
-  background-color: #f1f1f1;
+  background-color: rgba(241, 241, 241, 0.9);
   font-size: 1em;
   color: #333;
-  position: relative;
+  transition: all 0.3s ease;
 }
 
-.login-form .input-container {
-  position: relative;
+.input-container input:focus {
+  outline: none;
+  border-color: #44bd32;
+  background-color: white;
 }
 
-.login-form .input-container input {
-  padding-right: 40px;
-}
-
-.input-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  background-image: url('icon-placeholder.png');
-  background-size: cover;
-}
-
-.login-form button {
-  background-color: #44bd32;
+button {
+  background: linear-gradient(to right, #44bd32, #38a92c);
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
   border-radius: 8px;
-  font-size: 1em;
+  font-size: 1.1em;
   cursor: pointer;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
 }
 
-.login-form button:hover {
-  background-color: #38a92c;
+button:hover {
+  background: linear-gradient(to right, #38a92c, #2d8a23);
+  transform: scale(1.02);
 }
 
-.login-form p {
-  margin-top: 15px;
-  color: white;
+.login-form p, .registration-form p {
+  margin-top: 20px;
+  color: #f0f0f0;
 }
 
-.login-form a {
+.login-form a, .registration-form a {
   color: #fbc531;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.login-form a:hover {
+.login-form a:hover, .registration-form a:hover {
+  color: #f1c40f;
   text-decoration: underline;
 }
-
-.login-form {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
