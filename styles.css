@@ -17,13 +17,13 @@ body {
 
 /* Page-specific backgrounds */
 .index-page {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(background.jpg);
+  background: url(images/background.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .registration-page {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(registration-page.png);
+  background:  url(images/registration-page.png);
   background-size: cover;
   background-position: center;
 }
@@ -87,7 +87,7 @@ nav ul li a:hover {
 
 .welcome-text h1 {
   font-size: 3em;
-  margin-bottom: 20px;
+  margin-bottom: 70px;
   color: white;
 }
 
@@ -109,9 +109,7 @@ nav ul li a:hover {
   transition: transform 0.3s ease;
 }
 
-.login-form:hover, .registration-form:hover {
-  transform: translateY(-5px);
-}
+
 
 .login-form h2, .registration-form h2 {
   margin-bottom: 30px;
