@@ -1,0 +1,24 @@
+Full Name: John Doe
+Username: johndoe
+Aadhar Number: 123456789
+Password: password123
+
+Full Name: Jane Smith
+Username: janesmith
+Aadhar Number: 987654321
+Password: abc123def
+
+Full Name: David Lee
+Username: davidlee
+Aadhar Number: 456789123
+Password: mypassword
+
+Full Name: Sarah Patel
+Username: sarahpatel
+Aadhar Number: 789123456
+Password: secretpass
+
+Full Name: Michael Gupta
+Username: michaelgupta
+Aadhar Number: 159753852
+Password: password456

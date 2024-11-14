@@ -5,12 +5,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $conn = new mysqli('localhost', 'root', '', 'voting');
+    $conn = new mysqli('localhost', 'root', '', 'voting_portal');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $stmt = $conn->prepare("SELECT password FROM vote WHERE username = ?");
+    $stmt = $conn->prepare("SELECT password FROM user_data WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
@@ -21,13 +21,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (password_verify($password, $hashed_password)) {
             $_SESSION['username'] = $username;
-            header("Location: vote.html");
+            header("Location: vote.php");
             exit();
         } else {
-            echo "<script>alert('Incorrect password! Please try again.'); window.location.href = 'index.php';</script>";
+            echo "<script>
+                alert('Incorrect password! Please try again.');
+                window.location.href = 'index.php';
+            </script>";
         }
     } else {
-        echo "<script>alert('No user found with that username! Please register.'); window.location.href = 'index.php';</script>";
+        echo "<script>
+            alert('No user found with that username! Please register.');
+            window.location.href = 'index.php';
+        </script>";
     }
 
     $stmt->close();
@@ -48,8 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <nav>
       <div class="logo">Voting Portal</div>
       <ul>
-          <li><a href="index.html">Login</a></li>
-          <li><a href="registration.html">Register</a></li>
+          <li><a href="index.php">Login</a></li>
+          <li><a href="registration.php">Register</a></li>
       </ul>
   </nav>
 
@@ -74,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
               <button type="submit">Login</button>
               
-              <p>Don't have an account? <a href="registration.html">Sign up</a></p>
+              <p>Don't have an account? <a href="registration.php">Sign up</a></p>
           </form>
       </div>
   </div>

@@ -136,9 +136,7 @@
       if (!selectedCard) {
         alert("Please select an option before submitting.");
       } else if (confirm(`Are you sure you want to submit your vote for "${selectedCard}"?`)) {
-        // Simulate form submission
         alert("Vote submitted successfully!");
-        // Add form submission logic here if connected to backend
       }
     }
   </script>
