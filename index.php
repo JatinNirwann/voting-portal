@@ -2,23 +2,32 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Correctly retrieving username and password from form fields
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    // Database connection
     $conn = new mysqli('localhost', 'root', '', 'voting_portal');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // Prepare the SQL statement to prevent SQL injection
     $stmt = $conn->prepare("SELECT password FROM user_data WHERE username = ?");
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
 
+    // Check if username exists
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($hashed_password);
         $stmt->fetch();
 
+        // Verify password with hashed password in database
         if (password_verify($password, $hashed_password)) {
             $_SESSION['username'] = $username;
             header("Location: vote.php");
@@ -36,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </script>";
     }
 
+    // Close statement and connection
     $stmt->close();
     $conn->close();
 }
@@ -67,10 +77,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="login-form">
           <h2>Login</h2>
-          <form action="#" method="POST">
+          <!-- Correcting form action and input name for username -->
+          <form action="index.php" method="POST">
               <div class="input-container">
-                  <label for="userid">User ID</label>
-                  <input type="text" id="userid" name="userid" required>
+                  <label for="username">Username</label>
+                  <input type="text" id="username" name="username" required>
               </div>
               
               <div class="input-container">

@@ -4,57 +4,60 @@ $dbUsername = "root";
 $dbPassword = "";
 $dbname = "voting_portal";
 
+// Create a database connection
 $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
 
+// Check for a connection error
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fullname = $_POST["fullname"];
     $username = $_POST["username"];
     $password = $_POST["newpassword"];
     $aadhar_no = $_POST["aadhar_no"];
 
-    if ($password !== $confirmPassword) {
-        echo "<script>alert('Passwords do not match!');</script>";
+    // Hash the password and Aadhar number
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $hashed_aadhar_no = password_hash($aadhar_no, PASSWORD_DEFAULT);
+
+    // Check if the username already exists
+    $checkUsername = $conn->prepare("SELECT id FROM user_data WHERE username = ?");
+    $checkUsername->bind_param("s", $username);
+    $checkUsername->execute();
+    $checkUsername->store_result();
+
+    if ($checkUsername->num_rows > 0) {
+        echo "<script>alert('Username is already taken. Please choose a different one.');</script>";
     } else {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $hashed_aadhar_no = password_hash($aadhar_no, PASSWORD_DEFAULT);
+        // Check if the Aadhar number already exists
+        $checkAadhar = $conn->prepare("SELECT id FROM user_data WHERE aadhar_no = ?");
+        $checkAadhar->bind_param("s", $hashed_aadhar_no);
+        $checkAadhar->execute();
+        $checkAadhar->store_result();
 
-        $checkUsername = $conn->prepare("SELECT id FROM user_data WHERE username = ?");
-        $checkUsername->bind_param("s", $username);
-        $checkUsername->execute();
-        $checkUsername->store_result();
-
-        if ($checkUsername->num_rows > 0) {
-            echo "<script>alert('Username is already taken. Please choose a different one.');</script>";
+        if ($checkAadhar->num_rows > 0) {
+            echo "<script>alert('This Aadhar number is already registered.');</script>";
         } else {
-            $checkAadhar = $conn->prepare("SELECT id FROM user_data WHERE aadhar_no = ?");
-            $checkAadhar->bind_param("s", $hashed_aadhar_no);
-            $checkAadhar->execute();
-            $checkAadhar->store_result();
+            // Insert the new user into the database
+            $stmt = $conn->prepare("INSERT INTO user_data (fullname, username, password, aadhar_no) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $fullname, $username, $hashed_password, $hashed_aadhar_no);
 
-            if ($checkAadhar->num_rows > 0) {
-                echo "<script>alert('This Aadhar number is already registered.');</script>";
+            if ($stmt->execute()) {
+                echo "<script>
+                        alert('Registration successful!');
+                        window.location.href = 'index.php';
+                      </script>";
             } else {
-                $stmt = $conn->prepare("INSERT INTO user_data (fullname, username, password, aadhar_no) VALUES (?, ?, ?, ?)");
-                $stmt->bind_param("ssss", $fullname, $username, $hashed_password, $hashed_aadhar_no);
-
-                if ($stmt->execute()) {
-                    echo "<script>
-                                alert('Registration successful!');
-                                window.location.href = 'index.php';
-                            </script>";
-                } else {
-                    echo "<script>alert('Error: Could not register user. Please try again.');</script>";
-                }
-                $stmt->close();
+                echo "<script>alert('Error: Could not register user. Please try again.');</script>";
             }
-            $checkAadhar->close();
+            $stmt->close();
         }
-        $checkUsername->close();
+        $checkAadhar->close();
     }
+    $checkUsername->close();
 }
 
 $conn->close();
@@ -78,7 +81,7 @@ $conn->close();
         </ul>
     </nav>
 
-    <div class="registration-form" style="width: 565.575px; height: 601.175px; transform: translate(-311.2px, 200px); position: relative; left: -14px; top: -167px; transition: none;" >        
+    <div class="registration-form" style="width: 565.575px; height: 601.175px; transform: translate(-311.2px, 200px); position: relative; left: -14px; top: -167px; transition: none;">
         <h2>Register</h2>
 
         <form action="" method="POST">
