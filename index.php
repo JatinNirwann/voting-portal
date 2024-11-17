@@ -70,14 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </nav>
 
   <div class="container">
-      <div class="welcome-text">
-          <h1>Welcome to the Voting Portal</h1>
-          <p>"The vote is precious. It is the most powerful non-violent tool we have in a democratic society." - John Lewis</p>
-      </div>
-
       <div class="login-form">
           <h2>Login</h2>
-          <!-- Correcting form action and input name for username -->
           <form action="index.php" method="POST">
               <div class="input-container">
                   <label for="username">Username</label>
