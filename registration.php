@@ -19,9 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["newpassword"];
     $aadhar_no = $_POST["aadhar_no"];
 
-    // Hash the password and Aadhar number
+    // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $hashed_aadhar_no = password_hash($aadhar_no, PASSWORD_DEFAULT);
 
     // Check if the username already exists
     $checkUsername = $conn->prepare("SELECT id FROM user_data WHERE username = ?");
@@ -32,23 +31,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($checkUsername->num_rows > 0) {
         echo "<script>alert('Username is already taken. Please choose a different one.');</script>";
     } else {
-        // Check if the Aadhar number already exists
-        $checkAadhar = $conn->prepare("SELECT id FROM user_data WHERE aadhar_no = ?");
-        $checkAadhar->bind_param("s", $hashed_aadhar_no);
+        // Retrieve all Aadhar hashes to verify uniqueness
+        $checkAadhar = $conn->prepare("SELECT aadhar_no FROM user_data");
         $checkAadhar->execute();
-        $checkAadhar->store_result();
+        $checkAadhar->bind_result($stored_aadhar_hash);
 
-        if ($checkAadhar->num_rows > 0) {
+        $isAadharDuplicate = false;
+        while ($checkAadhar->fetch()) {
+            if (password_verify($aadhar_no, $stored_aadhar_hash)) {
+                $isAadharDuplicate = true;
+                break;
+            }
+        }
+
+        if ($isAadharDuplicate) {
             echo "<script>alert('This Aadhar number is already registered.');</script>";
         } else {
             // Insert the new user into the database
             $stmt = $conn->prepare("INSERT INTO user_data (fullname, username, password, aadhar_no) VALUES (?, ?, ?, ?)");
+            $hashed_aadhar_no = password_hash($aadhar_no, PASSWORD_DEFAULT); // Hash Aadhar for storage
             $stmt->bind_param("ssss", $fullname, $username, $hashed_password, $hashed_aadhar_no);
 
             if ($stmt->execute()) {
+                // Start a session and redirect to vote.php
+                session_start();
+                $_SESSION['username'] = $username;
                 echo "<script>
                         alert('Registration successful!');
-                        window.location.href = 'index.php';
+                        window.location.href = 'vote.php';
                       </script>";
             } else {
                 echo "<script>alert('Error: Could not register user. Please try again.');</script>";
@@ -81,7 +91,7 @@ $conn->close();
         </ul>
     </nav>
 
-    <div class="registration-form" style="width: 565.575px; height: 601.175px; transform: translate(-311.2px, 200px); position: relative; left: -14px; top: -167px; transition: none;">
+    <div class="registration-form">
         <h2>Register</h2>
 
         <form action="" method="POST">

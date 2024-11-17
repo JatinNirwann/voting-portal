@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,58 +69,59 @@
     }
   </style>
 </head>
+
 <body class="index-page">
   <nav>
-      <div class="logo">Voting Portal</div>
-      <ul>
-          <li><a href="index.html">Login</a></li>
-          <li><a href="registration.html">Register</a></li>
-      </ul>
+    <div class="logo">Voting Portal</div>
+    <ul>
+      <li><a href="index.php">Login</a></li>
+      <li><a href="registration.php">Register</a></li>
+    </ul>
   </nav>
 
   <div class="card-container">
-    <!-- Generating 10 cards -->
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 1">
-      <p>Name 1</p>
+      <img src="images/parties/AAP.png" alt="AAP">
+      <p>Aam Aadmi Party (AAP)</p>
     </div>
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 2">
-      <p>Name 2</p>
+      <img src="images/parties/AITC.png" alt="AITC">
+      <p>All India Trinamool Congress (AITC)</p>
     </div>
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 3">
-      <p>Name 3</p>
+      <img src="images/parties/BJP.png" alt="BJP">
+      <p>Bharatiya Janata Party (BJP)</p>
     </div>
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 4">
-      <p>Name 4</p>
+      <img src="images/parties/BSP.png" alt="BSP">
+      <p>Bahujan Samaj Party (BSP)</p>
     </div>
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 5">
-      <p>Name 5</p>
+      <img src="images/parties/CPI.png" alt="CPI">
+      <p>Communist Party of India (CPI)</p>
     </div>
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 6">
-      <p>Name 6</p>
+      <img src="images/parties/DMK.png" alt="DMK">
+      <p>Dravida Munnetra Kazhagam (DMK)</p>
     </div>
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 7">
-      <p>Name 7</p>
+      <img src="images/parties/INC.png" alt="INC">
+      <p>Indian National Congress (INC)</p>
     </div>
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 8">
-      <p>Name 8</p>
+      <img src="images/parties/JD.png" alt="JD">
+      <p>Janata Dal (JD)</p>
     </div>
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 9">
-      <p>Name 9</p>
+      <img src="images/parties/NCP.png" alt="NCP">
+      <p>Nationalist Congress Party (NCP)</p>
     </div>
     <div class="card" onclick="selectCard(this)">
-      <img src="https://via.placeholder.com/100" alt="Image 10">
-      <p>Name 10</p>
+      <img src="images/parties/SP.png" alt="SP">
+      <p>Samajwadi Party (SP)</p>
     </div>
   </div>
+
 
   <button class="submit-button" onclick="submitSelection()">Submit</button>
 
@@ -141,4 +143,5 @@
     }
   </script>
 </body>
+
 </html>
