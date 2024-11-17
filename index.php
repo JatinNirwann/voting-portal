@@ -72,6 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="container">
       <div class="welcome-text">
           <h1>Welcome to the Voting Portal</h1>
+          <p>"The vote is precious. It is the most powerful non-violent tool we have in a democratic society." - John Lewis</p>
       </div>
 
       <div class="login-form">
