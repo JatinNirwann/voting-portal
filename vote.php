@@ -7,7 +7,6 @@
   <title>Voting Portal - Select an Option</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Additional Styles for the Cards Page */
     .card-container {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -70,7 +69,7 @@
   </style>
 </head>
 
-<body class="index-page">
+<body class="voting-page">
   <nav>
     <div class="logo">Voting Portal</div>
     <ul>

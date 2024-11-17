@@ -16,17 +16,27 @@ body {
 }
 
 /* Page-specific backgrounds */
-.index-page {
-  background: url(images/background.jpg);
+.login-page {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/login-page.jpg');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
 }
 
 .registration-page {
-  background:  url(images/registration-page.png);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/registration-page.jpg');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
 }
+
+.voting-page {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 
 /* Navigation */
 nav {

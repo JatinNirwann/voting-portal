@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title>Voting Portal</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="index-page">
+<body class="login-page">
   <nav>
       <div class="logo">Voting Portal</div>
       <ul>
