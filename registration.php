@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fullname = $_POST["fullname"];
     $username = $_POST["username"];
     $password = $_POST["newpassword"];
-    $aadhar_no = $_POST["aadhar_no"];
+    $voter_id = $_POST["voter_id"];
 
     // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -32,13 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('Username is already taken. Please choose a different one.');</script>";
     } else {
         // Retrieve all Aadhar hashes to verify uniqueness
-        $checkAadhar = $conn->prepare("SELECT aadhar_no FROM user_data");
+        $checkAadhar = $conn->prepare("SELECT voter_id FROM user_data");
         $checkAadhar->execute();
         $checkAadhar->bind_result($stored_aadhar_hash);
 
         $isAadharDuplicate = false;
         while ($checkAadhar->fetch()) {
-            if (password_verify($aadhar_no, $stored_aadhar_hash)) {
+            if (password_verify($voter_id, $stored_aadhar_hash)) {
                 $isAadharDuplicate = true;
                 break;
             }
@@ -48,9 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('This Aadhar number is already registered.');</script>";
         } else {
             // Insert the new user into the database
-            $stmt = $conn->prepare("INSERT INTO user_data (fullname, username, password, aadhar_no) VALUES (?, ?, ?, ?)");
-            $hashed_aadhar_no = password_hash($aadhar_no, PASSWORD_DEFAULT); // Hash Aadhar for storage
-            $stmt->bind_param("ssss", $fullname, $username, $hashed_password, $hashed_aadhar_no);
+            $stmt = $conn->prepare("INSERT INTO user_data (fullname, username, password, voter_id) VALUES (?, ?, ?, ?)");
+            $hashed_voter_id = password_hash($voter_id, PASSWORD_DEFAULT); // Hash Aadhar for storage
+            $stmt->bind_param("ssss", $fullname, $username, $hashed_password, $hashed_voter_id);
 
             if ($stmt->execute()) {
                 // Start a session and redirect to vote.php
@@ -106,8 +106,8 @@ $conn->close();
             </div>
 
             <div class="input-container">
-                <label for="aadhar_no">Aadhar Number</label>
-                <input type="text" id="aadhar_no" name="aadhar_no" required>
+                <label for="voter_id">Aadhar Number</label>
+                <input type="text" id="voter_id" name="voter_id" required>
             </div>
 
             <div class="input-container">

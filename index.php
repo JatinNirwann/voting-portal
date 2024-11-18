@@ -2,7 +2,7 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Correctly retrieving username and password from form fields
+    // Retrieving username and password from form fields
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -27,11 +27,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_result($hashed_password);
         $stmt->fetch();
 
-        // Verify password with hashed password in database
+        // Verify password with hashed password in the database
         if (password_verify($password, $hashed_password)) {
-            $_SESSION['username'] = $username;
-            header("Location: vote.php");
-            exit();
+            // Retrieve the voter_id from the voters table
+            $voter_stmt = $conn->prepare("SELECT voter_id FROM voters WHERE username = ?");
+            if (!$voter_stmt) {
+                die("Prepare failed: " . $conn->error);
+            }
+            $voter_stmt->bind_param("s", $username);
+            $voter_stmt->execute();
+            $voter_stmt->bind_result($voter_id);
+
+            if ($voter_stmt->fetch()) {
+                $_SESSION['username'] = $username;
+                $_SESSION['voter_id'] = $voter_id; // Set voter_id in session
+                header("Location: vote.php");
+                exit();
+            } else {
+                echo "<script>
+                    alert('Voter ID not found for this user. Please contact support.');
+                    window.location.href = 'index.php';
+                </script>";
+            }
+
+            $voter_stmt->close();
         } else {
             echo "<script>
                 alert('Incorrect password! Please try again.');
