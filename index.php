@@ -103,7 +103,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
   <!-- Login Form -->
   <div class="container">
-      <div class="login-form">
+      <div class="login-form" style="position: relative; left: 814px; top: -13px;">
           <h2>Login</h2>
           <form action="index.php" method="POST">
               <!-- Username Input -->
