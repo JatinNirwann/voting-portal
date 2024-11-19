@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Retrieve form data
-    $fullname = $_POST["fullname"];
+    $full_name = $_POST["full_name"];
     $username = $_POST["username"];
     $voter_id = $_POST["voter_id"];
     $password = $_POST["newpassword"];
@@ -43,8 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('Username is already taken');</script>";
         } else {
             // Insert new user
-            $stmt = $conn->prepare("INSERT INTO user_data (fullname, username, password, voter_id) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $fullname, $username, $hashed_password, $voter_id);
+            $stmt = $conn->prepare("INSERT INTO user_data (full_name, username, password_hash, voter_id) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $full_name, $username, $hashed_password, $voter_id);
 
             if ($stmt->execute()) {
                 // Successful registration
@@ -85,8 +85,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
             <div class="input-container">
-                <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" required>
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" required>
             </div>
 
             <div class="input-container">
