@@ -1,87 +1,74 @@
 <?php
-$servername = "localhost";
-$dbUsername = "root";
-$dbPassword = "";
-$dbname = "voting_portal";
+require_once 'config.php'; // Include database configuration and password strength function
 
-// Create a database connection
-$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+session_start(); // Start session for CSRF protection
 
-// Check for a connection error
+// Generate CSRF token if it doesn't exist
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME); // Connect to database
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if the form has been submitted
+// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate CSRF token
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("CSRF token validation failed");
+    }
+
+    // Retrieve form data
     $fullname = $_POST["fullname"];
     $username = $_POST["username"];
-    $password = $_POST["newpassword"];
     $voter_id = $_POST["voter_id"];
+    $password = $_POST["newpassword"];
 
-    // Hash the password
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    // Check if the username already exists
-    $checkUsername = $conn->prepare("SELECT id FROM user_data WHERE username = ?");
-    $checkUsername->bind_param("s", $username);
-    $checkUsername->execute();
-    $checkUsername->store_result();
-
-    if ($checkUsername->num_rows > 0) {
-        echo "<script>alert('Username is already taken. Please choose a different one.');</script>";
+    // Validate password strength
+    if (!isPasswordStrong($password)) {
+        echo "<script>alert('Password does not meet strength requirements');</script>";
     } else {
-        // Retrieve all Aadhar hashes to verify uniqueness
-        $checkAadhar = $conn->prepare("SELECT voter_id FROM user_data");
-        $checkAadhar->execute();
-        $checkAadhar->bind_result($stored_aadhar_hash);
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $isAadharDuplicate = false;
-        while ($checkAadhar->fetch()) {
-            if (password_verify($voter_id, $stored_aadhar_hash)) {
-                $isAadharDuplicate = true;
-                break;
-            }
-        }
+        // Check if username is already taken
+        $checkUsername = $conn->prepare("SELECT id FROM user_data WHERE username = ?");
+        $checkUsername->bind_param("s", $username);
+        $checkUsername->execute();
+        $checkUsername->store_result();
 
-        if ($isAadharDuplicate) {
-            echo "<script>alert('This Aadhar number is already registered.');</script>";
+        if ($checkUsername->num_rows > 0) {
+            echo "<script>alert('Username is already taken');</script>";
         } else {
-            // Insert the new user into the database
+            // Insert new user
             $stmt = $conn->prepare("INSERT INTO user_data (fullname, username, password, voter_id) VALUES (?, ?, ?, ?)");
-            $hashed_voter_id = password_hash($voter_id, PASSWORD_DEFAULT); // Hash Aadhar for storage
-            $stmt->bind_param("ssss", $fullname, $username, $hashed_password, $hashed_voter_id);
+            $stmt->bind_param("ssss", $fullname, $username, $hashed_password, $voter_id);
 
             if ($stmt->execute()) {
-                // Start a session and redirect to vote.php
-                session_start();
+                // Successful registration
                 $_SESSION['username'] = $username;
                 echo "<script>
                         alert('Registration successful!');
                         window.location.href = 'vote.php';
                       </script>";
             } else {
-                echo "<script>alert('Error: Could not register user. Please try again.');</script>";
+                echo "<script>alert('Registration failed. Please try again.');</script>";
             }
-            $stmt->close();
         }
-        $checkAadhar->close();
     }
-    $checkUsername->close();
 }
-
-$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Voter Registration</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="registration-page">
     <nav>
         <div class="logo">Voting Portal</div>
@@ -95,6 +82,8 @@ $conn->close();
         <h2>Register</h2>
 
         <form action="" method="POST">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
             <div class="input-container">
                 <label for="fullname">Full Name</label>
                 <input type="text" id="fullname" name="fullname" required>
@@ -106,7 +95,7 @@ $conn->close();
             </div>
 
             <div class="input-container">
-                <label for="voter_id">Aadhar Number</label>
+                <label for="voter_id">Voter ID</label>
                 <input type="text" id="voter_id" name="voter_id" required>
             </div>
 
@@ -121,5 +110,4 @@ $conn->close();
         </form>
     </div>
 </body>
-
 </html>
