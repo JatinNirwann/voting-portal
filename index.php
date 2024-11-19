@@ -7,13 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Database connection
-    $conn = new mysqli('localhost', 'root', '', 'voting_portal');
+    $conn = new mysqli('localhost', 'root', '', 'testing_voting_portal');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
     // Use prepared statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT password FROM user_data WHERE username = ?");
+    $stmt = $conn->prepare("SELECT password_hash FROM user_data WHERE username = ?");
     if ($stmt) {
         $stmt->bind_param("s", $username);
         $stmt->execute();
