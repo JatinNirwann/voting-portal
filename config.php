@@ -4,6 +4,10 @@ define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'testing_voting_portal');
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "testing_voting_portal";
 
 // Password Strength Validation
 define('PASSWORD_MIN_LENGTH', 8);
