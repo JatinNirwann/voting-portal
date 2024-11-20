@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION['loggedin'] = true;       // Session flag for logged-in users
                         $_SESSION['username'] = $username; // Store username
                         $_SESSION['voter_id'] = $voter_id; // Store voter ID
-
+                    
                         // Redirect to the voting page after successful login
                         header("Location: vote.php");
                         exit();
