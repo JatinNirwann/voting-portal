@@ -11,73 +11,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Voting Portal - Select a Candidate</title>
-  <style>
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      width: 80%;
-      max-width: 1000px;
-      margin: 100px auto 20px;
-    }
-
-    .card {
-      background-color: rgba(35, 60, 86, 0.95);
-      border: 2px solid transparent;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      transition: transform 0.3s, border-color 0.3s;
-      padding: 10px;
-    }
-
-    .card p {
-      color: white;
-      font-size: 1em;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .card.selected {
-      border-color: #44bd32;
-      transform: scale(1.05);
-    }
-
-    .submit-button {
-      background: linear-gradient(to right, #44bd32, #38a92c);
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1em;
-      cursor: pointer;
-      margin: 20px auto;
-      display: block;
-      max-width: 200px;
-      transition: all 0.3s ease;
-      text-align: center;
-    }
-
-    .submit-button:hover {
-      background: linear-gradient(to right, #38a92c, #2d8a23);
-      transform: scale(1.02);
-    }
-
-    .message {
-      text-align: center;
-      font-size: 1.2em;
-      color: red;
-    }
-  </style>
 </head>
 
 <body class="voting-page">
   <nav>
     <div class="logo">Voting Portal</div>
     <ul>
-      <li><a href="index.php">Login</a></li>
-      <li><a href="registration.php">Register</a></li>
+      <li><a href="profile.php">Profile</a></li>
+      <li><a href="logout.php">Logout</a></li>
     </ul>
   </nav>
 
@@ -86,7 +27,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "voting_portal";
+    $dbname = "testing_voting_portal";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
