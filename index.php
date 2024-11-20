@@ -75,11 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
-// Check if the user is already logged in
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    header("Location: vote.php"); // Redirect logged-in users directly to the voting page
-    exit();
-}
 ?>
 
 <!DOCTYPE html>

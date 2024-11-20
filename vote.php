@@ -1,8 +1,64 @@
-<?php if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // Redirect to login page if not logged in
-    header("Location: index.php");
-    exit();
+<?php 
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  session_unset();
+  session_destroy();
+  header("Location: index.php");
+  exit();
 }
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "testing_voting_portal";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("<p class='message'>Database connection failed: " . $conn->connect_error . "</p>");
+}
+
+// Assume the logged-in voter ID is passed via session or other mechanism
+session_start();
+$voter_id = $_SESSION['voter_id'] ?? null;
+
+if ($voter_id) {
+  // Get district code of the logged-in voter
+  $sql_voter = "SELECT district_codes FROM voters WHERE voter_id='$voter_id'";
+  $result_voter = $conn->query($sql_voter);
+
+  if ($result_voter->num_rows > 0) {
+    $voter_data = $result_voter->fetch_assoc();
+    $district_code = $voter_data['district_codes'];
+
+    // Fetch candidates from the same district
+    $sql_candidates = "SELECT id, name, age, party FROM candidates WHERE district_code='$district_code'";
+    $result_candidates = $conn->query($sql_candidates);
+
+    if ($result_candidates->num_rows > 0) {
+      while ($candidate = $result_candidates->fetch_assoc()) {
+        $candidateName = htmlspecialchars($candidate['name']);
+        $candidateAge = htmlspecialchars($candidate['age']);
+        $candidateParty = htmlspecialchars($candidate['party']);
+        $candidateId = htmlspecialchars($candidate['id']);
+        echo "
+          <div class='card' onclick='selectCard(this)' data-id='$candidateId'>
+            <p>$candidateName</p>
+            <p>Age: $candidateAge</p>
+            <p>Party: $candidateParty</p>
+          </div>
+        ";
+      }
+    } else {
+      echo "<p class='message'>No candidates found in your district.</p>";
+    }
+  } else {
+    echo "<p class='message'>Invalid voter ID.</p>";
+  }
+} else {
+  echo "<p class='message'>Please log in to view candidates.</p>";
+}
+
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,61 +79,6 @@
   </nav>
 
   <div class="card-container">
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "testing_voting_portal";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-      die("<p class='message'>Database connection failed: " . $conn->connect_error . "</p>");
-    }
-
-    // Assume the logged-in voter ID is passed via session or other mechanism
-    session_start();
-    $voterid = $_SESSION['voterid'] ?? null;
-
-    if ($voterid) {
-      // Get district code of the logged-in voter
-      $sql_voter = "SELECT district_codes FROM voters WHERE voterid='$voterid'";
-      $result_voter = $conn->query($sql_voter);
-
-      if ($result_voter->num_rows > 0) {
-        $voter_data = $result_voter->fetch_assoc();
-        $district_code = $voter_data['district_codes'];
-
-        // Fetch candidates from the same district
-        $sql_candidates = "SELECT id, name, age, party FROM candidates WHERE district_code='$district_code'";
-        $result_candidates = $conn->query($sql_candidates);
-
-        if ($result_candidates->num_rows > 0) {
-          while ($candidate = $result_candidates->fetch_assoc()) {
-            $candidateName = htmlspecialchars($candidate['name']);
-            $candidateAge = htmlspecialchars($candidate['age']);
-            $candidateParty = htmlspecialchars($candidate['party']);
-            $candidateId = htmlspecialchars($candidate['id']);
-            echo "
-              <div class='card' onclick='selectCard(this)' data-id='$candidateId'>
-                <p>$candidateName</p>
-                <p>Age: $candidateAge</p>
-                <p>Party: $candidateParty</p>
-              </div>
-            ";
-          }
-        } else {
-          echo "<p class='message'>No candidates found in your district.</p>";
-        }
-      } else {
-        echo "<p class='message'>Invalid voter ID.</p>";
-      }
-    } else {
-      echo "<p class='message'>Please log in to view candidates.</p>";
-    }
-
-    $conn->close();
-    ?>
   </div>
 
   <button class="submit-button" onclick="submitSelection()">Submit</button>
