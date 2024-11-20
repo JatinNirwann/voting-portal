@@ -8,7 +8,7 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME); // Connect to database
+$conn = new mysqli($servername,$username,$password,$dbname); // Connect to database
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
