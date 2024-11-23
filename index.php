@@ -21,7 +21,7 @@
             <?php if (isset($_GET['error'])): ?>
                 <p class="error"><?= htmlspecialchars($_GET['error']) ?></p>
             <?php endif; ?>
-            <form action="process_login.php" method="POST">
+            <form action="processing/process_login.php" method="POST">
                 <div class="input-container">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>

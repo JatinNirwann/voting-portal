@@ -20,7 +20,7 @@
         <?php if (isset($_GET['error'])): ?>
             <p class="error"><?= htmlspecialchars($_GET['error']) ?></p>
         <?php endif; ?>
-        <form action="process_registration.php" method="POST">
+        <form action="processing/process_registration.php" method="POST">
             <div class="input-container">
                 <label for="full_name">Full Name</label>
                 <input type="text" id="full_name" name="full_name" required>

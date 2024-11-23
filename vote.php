@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote - Voting Portal</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesheet/styles.css">
 </head>
 <body class="voting-page">
     <nav>
@@ -18,7 +18,7 @@
     <div class="card-container">
         <?php
         // Include the PHP logic to fetch candidates
-        include 'fetch_candidates.php';
+        include 'processing/fetch_candidates.php';
         ?>
     </div>
 </body>
