@@ -1,0 +1,28 @@
+//Dummy data for voters table
+
+INSERT INTO voters (voter_id, district_code, username) VALUES
+('VOTER001', 1, 'john_doe'),
+('VOTER002', 2, 'jane_doe'),
+('VOTER003', 3, 'mark_twain'),
+('VOTER004', 1, 'emma_stone'),
+('VOTER005', 2, 'chris_evans'),
+('VOTER006', 3, 'scarlett_j'),
+('VOTER007', 1, 'bruce_wayne'),
+('VOTER008', 2, 'diana_prince'),
+('VOTER009', 3, 'clark_kent'),
+('VOTER010', 1, 'tony_stark');
+
+
+//Dummy data for district table
+
+INSERT INTO districts (district_code, district_name, state) VALUES
+(1, 'Mumbai Suburban', 'Maharashtra'),
+(2, 'Pune', 'Maharashtra'),
+(3, 'Bengaluru Urban', 'Karnataka'),
+(4, 'Chennai', 'Tamil Nadu'),
+(5, 'Hyderabad', 'Telangana'),
+(6, 'Ahmedabad', 'Gujarat'),
+(7, 'Jaipur', 'Rajasthan'),
+(8, 'Kolkata', 'West Bengal'),
+(9, 'Lucknow', 'Uttar Pradesh'),
+(10, 'Bhopal', 'Madhya Pradesh');
