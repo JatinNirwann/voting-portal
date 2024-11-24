@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['logged_in'] = true;
 
             // Redirect to vote.php after successful login
-            header("Location: vote.php");
+            header("Location: ../vote.php");
             exit();
         } else {
             // Redirect back with an error message
