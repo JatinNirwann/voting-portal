@@ -1,9 +1,6 @@
 <?php
-// Database connection
-$conn = new mysqli('localhost', 'root', '', 'testing_voting_portal');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+session_start();
+require_once('config.php');
 
 // Check if the request is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -12,17 +9,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Prepare and execute query to fetch user credentials
-    $stmt = $conn->prepare("SELECT password_hash FROM user_data WHERE username = ?");
+    $stmt = $conn->prepare("SELECT id, username, voter_id, password_hash FROM user_data WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($hashed_password);
+        $stmt->bind_result($id, $username, $voter_id, $hashed_password);
         $stmt->fetch();
 
         // Verify password
         if (password_verify($password, $hashed_password)) {
+            // Set session variables
+            $_SESSION['user_id'] = $id;
+            $_SESSION['username'] = $username;
+            $_SESSION['voter_id'] = $voter_id;
+            $_SESSION['logged_in'] = true;
+
             // Redirect to vote.php after successful login
             header("Location: vote.php");
             exit();

@@ -1,9 +1,6 @@
 <?php
-// Database connection
-$conn = new mysqli('localhost', 'root', '', 'testing_voting_portal');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+session_start();
+require_once('config.php');
 
 // Check if the request is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -30,10 +27,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insert_stmt->bind_param("ssss", $full_name, $username, $hashed_password, $voter_id);
 
         if ($insert_stmt->execute()) {
+            // Set session variables after successful registration
+            $_SESSION['username'] = $username;
+            $_SESSION['voter_id'] = $voter_id;
+            $_SESSION['logged_in'] = true;
+            
             // Redirect to login page after successful registration
             echo "<script>
                     alert('Registration successful! Please log in.');
-                    window.location.href = 'index.php';
+                    window.location.href = 'http://localhost:3000/index.php';
                   </script>";
             exit();
         } else {

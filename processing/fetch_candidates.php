@@ -1,17 +1,20 @@
 <?php
-// Connect to the database
-$conn = new mysqli('localhost', 'root', '', 'testing_voting_portal');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+session_start();
+require_once('config.php');
 
-// Retrieve voter ID securely (e.g., from query parameters or another secure source)
-if (!isset($_GET['voter_id']) || empty($_GET['voter_id'])) {
-    echo "<p class='message'>Invalid voter ID. Please try again.</p>";
+// Check if user is logged in
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    echo "<p class='message'>Please log in to view candidates.</p>";
     exit();
 }
 
-$voter_id = $_GET['voter_id'];
+// Use voter_id from session instead of GET parameter
+$voter_id = $_SESSION['voter_id'];
+
+if (empty($voter_id)) {
+    echo "<p class='message'>Invalid voter ID. Please try again.</p>";
+    exit();
+}
 
 // Check if the voter has already voted
 $stmt = $conn->prepare("SELECT id FROM votes WHERE voter_id = ?");
