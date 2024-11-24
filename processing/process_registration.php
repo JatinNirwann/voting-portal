@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirect to login page after successful registration
             echo "<script>
                     alert('Registration successful! Please log in.');
-                    window.location.href = 'http://localhost:3000/index.php';
+                    window.location.href = '../index.php';
                   </script>";
             exit();
         } else {
