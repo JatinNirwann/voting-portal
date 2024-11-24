@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        header("Location: registration.php?error=Username or Voter ID is already registered!");
+        header("Location: ../registration.php?error=Username or Voter ID is already registered!");
         exit();
     } else {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   </script>";
             exit();
         } else {
-            header("Location: registration.php?error=Registration failed. Please try again.");
+            header("Location: ../registration.php?error=Registration failed. Please try again.");
             exit();
         }
         $insert_stmt->close();

@@ -24,11 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../vote.php");
             exit();
         } else {
-            header("Location: index.php?error=Incorrect password!");
+            header("Location: ../index.php?error=Incorrect password!");
             exit();
         }
     } else {
-        header("Location: index.php?error=No user found with that username!");
+        header("Location: ../index.php?error=No user found with that username!");
         exit();
     }
 
