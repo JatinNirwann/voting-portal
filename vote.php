@@ -11,13 +11,12 @@
         <div class="logo">Voting Portal</div>
         <ul>
             <li><a href="profile.php">Profile</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="processing/logout.php">Logout</a></li>
         </ul>
     </nav>
 
     <div class="card-container">
         <?php
-        // Include the PHP logic to fetch candidates
         include 'processing/fetch_candidates.php';
         ?>
     </div>

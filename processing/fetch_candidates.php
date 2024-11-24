@@ -2,13 +2,11 @@
 session_start();
 require_once('config.php');
 
-// Check if user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     echo "<p class='message'>Please log in to view candidates.</p>";
     exit();
 }
 
-// Use voter_id from session instead of GET parameter
 $voter_id = $_SESSION['voter_id'];
 
 if (empty($voter_id)) {
@@ -44,7 +42,7 @@ if (!$district_code) {
     exit();
 }
 
-// Fetch candidates for the voter's district
+// Fetching candidates
 $query = $conn->prepare("SELECT id, name, age, party FROM candidates WHERE district_code = ?");
 $query->bind_param("s", $district_code);
 $query->execute();
