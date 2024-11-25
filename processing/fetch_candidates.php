@@ -28,7 +28,6 @@ if ($stmt->num_rows > 0) {
 }
 $stmt->close();
 
-// Fetch the voter's district code
 $stmt = $conn->prepare("SELECT district_code FROM voters WHERE voter_id = ?");
 $stmt->bind_param("s", $voter_id);
 $stmt->execute();
@@ -42,8 +41,7 @@ if (!$district_code) {
     exit();
 }
 
-// Fetching candidates
-$query = $conn->prepare("SELECT id, name, age, party FROM candidates WHERE district_code = ?");
+$query = $conn->prepare("SELECT id, name, age, party, photo FROM candidates WHERE district_code = ?");
 $query->bind_param("s", $district_code);
 $query->execute();
 $result = $query->get_result();
@@ -51,9 +49,12 @@ $result = $query->get_result();
 if ($result->num_rows > 0) {
     while ($candidate = $result->fetch_assoc()) {
         echo "<div class='card' data-id='" . htmlspecialchars($candidate['id']) . "'>";
-        echo "<p>Name: " . htmlspecialchars($candidate['name']) . "</p>";
+        echo "<img src='" . htmlspecialchars($candidate['photo']) . "' alt='" . htmlspecialchars($candidate['name']) . "' class='candidate-photo'>";
+        echo "<p class='candidate-name'>" . htmlspecialchars($candidate['name']) . "</p>";
+        echo "<div class='details'>";
         echo "<p>Age: " . htmlspecialchars($candidate['age']) . "</p>";
         echo "<p>Party: " . htmlspecialchars($candidate['party']) . "</p>";
+        echo "</div>";
         echo "</div>";
     }
 } else {
