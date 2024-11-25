@@ -16,7 +16,7 @@
     </nav>
 
     <div class="container">
-        <div class="login-form">
+        <div class="login-form" style="position: relative; left: 833px; top: -5px;">
             <h2>Login</h2>
             <?php if (isset($_GET['error'])): ?>
                 <p class="error"><?= htmlspecialchars($_GET['error']) ?></p>
