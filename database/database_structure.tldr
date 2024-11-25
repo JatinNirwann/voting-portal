@@ -738,10 +738,10 @@
 				"dash": "solid",
 				"size": "m",
 				"font": "serif",
-				"text": "id INT AUTO_INCREMENT PRIMARY KEY,\n\nvoter_id VARCHAR(12) NOT NULL,\n\ncandidate_id INT NOT NULL,\n\nvote_cast BOOLEAN DEFAULT TRUE,\n\ncreated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n\nFOREIGN KEY (voter_id) REFERENCES voters(voter_id),\n\nFOREIGN KEY (candidate_id) REFERENCES candidates(id)",
+				"text": "id INT AUTO_INCREMENT PRIMARY KEY,\n\nvoter_id VARCHAR(12) NOT NULL,\n\ncandidate_id INT NOT NULL,\n\nvote_cast BOOLEAN DEFAULT TRUE,\n\ncreated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n\nFOREIGN KEY (voter_id) REFERENCES voters(voter_id),\n\nFOREIGN KEY (candidate_id) REFERENCES candidates(id),\n\nvote_given_to varchar(255);",
 				"align": "start",
 				"verticalAlign": "middle",
-				"growY": 105.9962871722658,
+				"growY": 165.39628106875017,
 				"url": "",
 				"scale": 1
 			},
@@ -1139,9 +1139,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -300.7403722434673,
-			"y": 880.1614570716827,
-			"lastActivityTimestamp": 1732523155273,
+			"x": 1584.0119524636516,
+			"y": 1032.7878502961578,
+			"lastActivityTimestamp": 1732541661909,
 			"meta": {}
 		},
 		{
@@ -1190,12 +1190,12 @@
 			"typeName": "instance"
 		},
 		{
-			"editingShapeId": "shape:oZcTaHVthbVvhxrV6RXZM",
+			"editingShapeId": "shape:iNb793UJ1FmjHcPm_uzhB",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:oZcTaHVthbVvhxrV6RXZM"
+				"shape:iNb793UJ1FmjHcPm_uzhB"
 			],
-			"hoveredShapeId": "shape:oZcTaHVthbVvhxrV6RXZM",
+			"hoveredShapeId": "shape:iNb793UJ1FmjHcPm_uzhB",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -1205,9 +1205,9 @@
 			"typeName": "instance_page_state"
 		},
 		{
-			"x": 942.3916910789943,
-			"y": 554.9297584207445,
-			"z": 0.4058278791806428,
+			"x": 946.3280241513124,
+			"y": 548.0570798470774,
+			"z": 0.40484679287424585,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
