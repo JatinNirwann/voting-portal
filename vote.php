@@ -15,10 +15,29 @@
         </ul>
     </nav>
 
-    <div class="card-container">
-        <?php
-        include 'processing/fetch_candidates.php';
-        ?>
+    <div class="container">
+        <form id="vote-form" action="processing/submit_vote.php" method="POST" style="position: relative; left: 322px; top: -35px;">
+            <div class="card-container">
+                <?php include 'processing/fetch_candidates.php'; ?>
+            </div>
+            <button type="submit" class="btn-submit" disabled>Submit Vote</button>
+        </form>
     </div>
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+        const submitBtn = document.querySelector('.btn-submit');
+        let selectedCard = null;
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (selectedCard) selectedCard.classList.remove('selected');
+                card.classList.add('selected');
+                selectedCard = card;
+                submitBtn.disabled = false;
+                document.querySelector('#vote-form').action = `processing/submit_vote.php?id=${card.dataset.id}`;
+            });
+        });
+    </script>
 </body>
 </html>
