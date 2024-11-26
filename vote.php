@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once 'processing/config.php';
 
 if (!isset($_SESSION['voter_id'])) {
     header('Location: index.php');
@@ -25,14 +25,13 @@ if (!isset($_SESSION['voter_id'])) {
     </nav>
 
     <div class="container">
-        <form id="vote-form" action="processing/submit_vote.php" method="POST">
+        <form id="vote-form" action="processing/submit_vote.php" method="POST" style="position: relative; left: 280px; top: -37px;">
             <div class="card-container">
                 <?php include 'processing/fetch_candidates.php'; ?>
             </div>
             <button type="submit" class="btn-submit" disabled>Submit Vote</button>
         </form>
 
-        <!-- Vote Confirmation Modal -->
         <div id="confirmModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
             <div class="login-form" style="width:400px; background:rgba(35, 60, 86, 0.95); padding:30px; border-radius:15px;">
                 <h2>Confirm Your Vote</h2>
