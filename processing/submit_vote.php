@@ -37,16 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Incorrect password.");
         }
 
-        $stmt = $conn->prepare("SELECT vote_cast FROM voters WHERE voter_id = ?");
-        $stmt->bind_param("s", $voterId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $voter = $result->fetch_assoc();
-
-        if ($voter['vote_cast']) {
-            http_response_code(403);
-            die("You have already cast your vote.");
-        }
 
         $stmt = $conn->prepare("SELECT id FROM candidates WHERE id = ?");
         $stmt->bind_param("i", $candidateId);
@@ -60,11 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $hashedCandidate = hashCandidateSelection($candidateId);
 
-        $stmt = $conn->prepare("INSERT INTO votes (voter_id, candidate_id, vote_given_to) VALUES (?, ?, ?)");
-        $stmt->bind_param("sis", $voterId, $candidateId, $hashedCandidate);
+        $stmt = $conn->prepare("INSERT INTO votes (voter_id, candidate_id) VALUES (?, ?)");
+        $stmt->bind_param("ss", $voterId, $hashedCandidate);
         $stmt->execute();
 
-        $stmt = $conn->prepare("UPDATE voters SET vote_cast = TRUE WHERE voter_id = ?");
+        $stmt = $conn->prepare("UPDATE votes SET vote_cast = 1 WHERE voter_id = ?");
         $stmt->bind_param("s", $voterId);
         $stmt->execute();
 

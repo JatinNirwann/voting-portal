@@ -12,14 +12,14 @@ if (empty($voter_id)) {
     echo "<p class='message'>Invalid voter ID. Please try again.</p>";
     exit();
 }
-
-// Check if the voter has already voted
-$stmt = $conn->prepare("SELECT id FROM votes WHERE voter_id = ?");
+$stmt = $conn->prepare("SELECT vote_cast FROM votes WHERE voter_id = ?");
 $stmt->bind_param("s", $voter_id);
 $stmt->execute();
 $stmt->store_result();
+$stmt->bind_result($vote_cast);
+$stmt->fetch();
 
-if ($stmt->num_rows > 0) {
+if ($stmt->num_rows > 0 && $vote_cast != 0) { //non-zero means vote casted 
     echo "<p class='message'>You have already voted and cannot vote again.</p>";
     $stmt->close();
     $conn->close();
