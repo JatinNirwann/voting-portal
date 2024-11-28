@@ -246,3 +246,15 @@ button:hover {
   padding: 10px;
   margin-top: 20px;
 }
+
+.dashboard-page {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/dashboard-page.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.message{
+  display: flex;
+  justify-content: center;
+}

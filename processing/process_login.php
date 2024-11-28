@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['voter_id'] = $voter_id;
             $_SESSION['logged_in'] = true;
 
-            header("Location: ../vote.php");
+            header("Location: ../dashboard.php");
             exit();
         } else {
             header("Location: ../index.php?error=Incorrect password!");

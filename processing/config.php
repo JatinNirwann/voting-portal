@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "testing_voting_portal";
+$dbname = "testing_voting_portal";//this is testing database not final one
 
 if (!$conn = mysqli_connect($servername,$username,$password,$dbname)) {
     die("Failed to connect");

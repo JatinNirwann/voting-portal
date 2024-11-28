@@ -2,7 +2,7 @@
 require_once('config.php');
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    echo "<p class='message'>Please log in to view candidates.</p>";
+    echo "<script>alert('Please log in to view candidates')</script>";
     exit();
 }
 
