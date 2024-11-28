@@ -24,7 +24,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     <nav>
         <div class="logo">Voting Portal</div>
         <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="vote.php">Vote</a></li>
             <li><a href="profile.php">Profile</a></li>
             <li><a href="processing/logout.php">Logout</a></li>

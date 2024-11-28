@@ -258,3 +258,7 @@ button:hover {
   display: flex;
   justify-content: center;
 }
+
+.profile-page{
+  background-color: #333;
+}

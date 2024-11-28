@@ -407,10 +407,10 @@
 				"dash": "solid",
 				"size": "m",
 				"font": "serif",
-				"text": "id INT AUTO_INCREMENT PRIMARY KEY,\n\nname VARCHAR(100) NOT NULL,\n\nage TINYINT NOT NULL,\n\ndistrict_code INT NOT NULL,\n\nparty VARCHAR(100) NOT NULL,\n\nphoto VARCHAR(255) DEFAULT 'default-image.png';\n\nFOREIGN KEY (district_code) REFERENCES districts(district_code)",
+				"text": "id INT AUTO_INCREMENT PRIMARY KEY,\n\nname VARCHAR(100) NOT NULL,\n\nage TINYINT NOT NULL,\n\ndistrict_code INT NOT NULL,\n\nparty VARCHAR(100) NOT NULL,\n\nphoto VARCHAR(255) DEFAULT 'default-image.png',\n\ndiscription VARCHAR(255);\n\nFOREIGN KEY (district_code) REFERENCES districts(district_code)",
 				"align": "start",
 				"verticalAlign": "middle",
-				"growY": 17.939653862896307,
+				"growY": 77.33964775938068,
 				"url": "",
 				"scale": 1
 			},
@@ -1139,9 +1139,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 1584.0119524636516,
-			"y": 1032.7878502961578,
-			"lastActivityTimestamp": 1732541661909,
+			"x": -401.917553420088,
+			"y": 917.6708135919171,
+			"lastActivityTimestamp": 1732810808284,
 			"meta": {}
 		},
 		{
@@ -1161,7 +1161,7 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1318.4000244140625,
+				"w": 1258.4000244140625,
 				"h": 702.4000244140625
 			},
 			"insets": [
@@ -1190,12 +1190,12 @@
 			"typeName": "instance"
 		},
 		{
-			"editingShapeId": "shape:iNb793UJ1FmjHcPm_uzhB",
+			"editingShapeId": "shape:oZcTaHVthbVvhxrV6RXZM",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:iNb793UJ1FmjHcPm_uzhB"
+				"shape:oZcTaHVthbVvhxrV6RXZM"
 			],
-			"hoveredShapeId": "shape:iNb793UJ1FmjHcPm_uzhB",
+			"hoveredShapeId": "shape:oZcTaHVthbVvhxrV6RXZM",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -1205,9 +1205,9 @@
 			"typeName": "instance_page_state"
 		},
 		{
-			"x": 946.3280241513124,
-			"y": 548.0570798470774,
-			"z": 0.40484679287424585,
+			"x": 1018.7373396524166,
+			"y": 75.96111623680048,
+			"z": 0.49998395119627986,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
