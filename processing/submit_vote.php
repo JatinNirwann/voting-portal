@@ -3,7 +3,7 @@ session_start();
 require_once 'config.php';
 
 function hashCandidateSelection($candidateId) {
-    $salt = 'vB9x$K2#mQ7zL4^pF3*wJ6';  // Randomly generated salt
+    $salt = 'vB9x$K2#mQ7zL4^pF3*wJ6';
     return hash('sha256', $candidateId . $salt);
 }
 
@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? null;
 
     if (!$candidateId || !$voterId || !$password) {
-        http_response_code(400);
         die("Missing required information.");
     }
 
@@ -26,14 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->get_result();
 
         if ($result->num_rows === 0) {
-            http_response_code(401);
             die("Invalid voter ID.");
         }
 
         $user = $result->fetch_assoc();
 
         if (!password_verify($password, $user['password_hash'])) {
-            http_response_code(401);
             die("Incorrect password.");
         }
 
@@ -44,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->get_result();
 
         if ($result->num_rows === 0) {
-            http_response_code(400);
             die("Invalid candidate selection.");
         }
 
@@ -60,17 +56,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $conn->commit();
 
-        http_response_code(200);
         echo "Vote submitted successfully.";
+        <script>
+            window.location.href = "thank_you.php";
+          </script>';
+    
 
     } catch (Exception $e) {
         $conn->rollback();
 
-        http_response_code(500);
         echo "An internal error occurred. Please try again.";
     }
 } else {
-    http_response_code(405);
     echo "Invalid request method.";
 }
 
