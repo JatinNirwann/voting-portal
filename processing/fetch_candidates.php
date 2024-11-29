@@ -49,12 +49,12 @@ $result = $query->get_result();
 if ($result->num_rows > 0) {
     while ($candidate = $result->fetch_assoc()) {
         echo "<div class='card' data-id='" . htmlspecialchars($candidate['id']) . "'>";
-        echo "<img src='" . htmlspecialchars($candidate['photo']) . htmlspecialchars($candidate['name']) . "' class='candidate-photo'>";
+        echo "<img src='" . htmlspecialchars($candidate['photo']) . "' alt='" . htmlspecialchars($candidate['name']) . "' class='candidate-photo'>";
         echo "<p class='candidate-name'>" . htmlspecialchars($candidate['name']) . "</p>";
         echo "<div class='details'>";
         echo "<p>Age: " . htmlspecialchars($candidate['age']) . "</p>";
         echo "<p>Party: " . htmlspecialchars($candidate['party']) . "</p>";
-        echo "<p>: " . htmlspecialchars($candidate['discription']) . "</p>";
+        echo "<p>" . htmlspecialchars($candidate['discription']) . "</p>";
         echo "</div>";
         echo "</div>";
     }

@@ -28,7 +28,7 @@ if (!isset($_SESSION['voter_id'])) {
     </nav>
 
     <div class="container">
-        <form id="vote-form" action="processing/submit_vote.php" method="POST" style="position: relative; left: 280px; top: -37px;">
+        <form id="vote-form" action="processing/submit_vote.php" method="POST" style="position: relative; left: 181px; top: -53px;">
             <div class="card-container">
                 <?php include 'processing/fetch_candidates.php'; ?>
             </div>
@@ -50,7 +50,6 @@ if (!isset($_SESSION['voter_id'])) {
             </div>
         </div>
     </div>
-
     <script>
         const cards = document.querySelectorAll('.card');
         const submitBtn = document.querySelector('.btn-submit');

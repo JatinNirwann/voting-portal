@@ -1,5 +1,5 @@
 -- Almora, Uttarakhand (District Code: 101)
-INSERT INTO candidates (name, age, district_code, party, discription)
+INSERT INTO candidates (name, age, constituency_code, party, discription)
 VALUES
 ('Trivendra Singh Rawat', 63, 101, 'Bharatiya Janata Party (BJP)', 
  'Trivendra Singh Rawat is a senior leader of the BJP and served as the Chief Minister of Uttarakhand from 2017 to 2021. He is known for his focus on rural development and environmental conservation in the state.'),
@@ -9,7 +9,7 @@ VALUES
  'Kiran Aryan is a prominent leader of the Uttarakhand Parivartan Party, advocating for sustainable development in the state. Her efforts focus on empowering local communities and promoting environmental preservation.');
 
 -- Chandni Chowk, Delhi (District Code: 102)
-INSERT INTO candidates (name, age, district_code, party, discription)
+INSERT INTO candidates (name, age, constituency_code, party, discription)
 VALUES
 ('Kamaljeet Sehrawat', NULL, 102, 'Bharatiya Janata Party (BJP)', 
  'Kamaljeet Sehrawat, a leader of the BJP, is known for her work in urban governance and women\'s empowerment. She previously served as the mayor of South Delhi, focusing on sanitation and civic improvements.'),
@@ -19,7 +19,7 @@ VALUES
  'Dinesh Singh, a representative of the Aam Aadmi Party, is committed to grassroots development and transparent governance. He focuses on improving education and healthcare facilities in his constituency.');
 
 -- North Delhi (District Code: 103)
-INSERT INTO candidates (name, age, district_code, party, discription)
+INSERT INTO candidates (name, age, constituency_code, party, discription)
 VALUES
 ('CM Ramesh', NULL, 103, 'Independent (IND)', 
  'CM Ramesh, an independent politician, is known for his focus on regional development and welfare programs. His initiatives prioritize rural empowerment and enhancing basic infrastructure in his constituency.'),
@@ -29,7 +29,7 @@ VALUES
  'Om Shankar, a leader of the Ekam Sanatan Bharat Dal, advocates for the revival of cultural and spiritual values. His efforts focus on promoting harmony and sustainable development rooted in traditional Indian principles.');
 
 -- Arunachal West (District Code: 104)
-INSERT INTO candidates (name, age, district_code, party, discription)
+INSERT INTO candidates (name, age, constituency_code, party, discription)
 VALUES
 ('Omak Nitik', 35, 104, 'Independent (IND)', 
  'Omak Nitik, an independent political leader, emphasizes youth empowerment and innovative approaches to governance. His initiatives prioritize education, employment, and community-driven development.'),
@@ -39,7 +39,7 @@ VALUES
  'Kiren Rijiju, a prominent BJP leader, serves as a Member of Parliament from Arunachal Pradesh. Known for his dynamic leadership, he has held key portfolios, including Law and Justice, focusing on legal reforms and northeast development.');
 
 -- Arunachal East (District Code: 105)
-INSERT INTO candidates (name, age, district_code, party, discription)
+INSERT INTO candidates (name, age, constituency_code, party, discription)
 VALUES
 ('Bandey Mili', NULL, 105, 'Arunachal Democratic Party', 
  'Bandey Mili, a leader of the Arunachal Democratic Party, advocates for regional autonomy and the empowerment of local communities. His priorities include education, healthcare, and preserving Arunachal Pradesh\'s cultural heritage.'),
@@ -49,7 +49,7 @@ VALUES
  'Tapir Gao, a senior BJP leader, is a Member of Parliament from Arunachal Pradesh. He is known for advocating the rights of tribal communities and focusing on infrastructure and connectivity in the northeastern region.');
 
 -- Delhi West (District Code: 106)
-INSERT INTO candidates (name, age, district_code, party, discription)
+INSERT INTO candidates (name, age, constituency_code, party, discription)
 VALUES
 ('Nivedita Sharma "Prem"', 51, 106, 'Rashtrawadi Janlok Party (Satya)', 
  'Nivedita Sharma "Prem," a leader of the Rashtrawadi Janlok Party (Satya), is committed to ethical governance and social justice. Her focus lies in empowering women and promoting transparency in public administration.'),
