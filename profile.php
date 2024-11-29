@@ -2,14 +2,15 @@
 session_start();
 require_once 'processing/config.php';
 
-if (!isset($_SESSION['voter_id'])) {
-    header('Location: index.php');
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    echo "<script>alert('Please login first');
+            window.location.href = 'index.php';</script>";
     exit();
 }
 
 $voter_id = $_SESSION['voter_id'];
 
-$stmt = $conn->prepare("SELECT username, age,  district_code FROM voters WHERE voter_id = ?");
+$stmt = $conn->prepare("SELECT username, age,  constituency_code FROM voters WHERE voter_id = ?");
 $stmt->bind_param("s", $voter_id);
 $stmt->execute();
 $user_result = $stmt->get_result();
@@ -67,19 +68,22 @@ $conn->close();
         </ul>
     </nav>
 
-    <div >
+    <div class="profile-container">
         <h1>Welcome, <?php echo htmlspecialchars($user['username']); ?>!</h1>
+        
         <p><strong>Age:</strong> <?php echo htmlspecialchars($user['age']); ?></p>
-        <p><strong>District Code:</strong> <?php echo htmlspecialchars($user['district_code']); ?></p>
+        <p><strong>Constituency Code:</strong> <?php echo htmlspecialchars($user['constituency_code']); ?></p>
 
         <hr>
 
-        <h2>Analytics</h2>
-        <?php if ($analytics_available): ?>
-            <p>The majority party based on votes so far is: <strong><?php echo htmlspecialchars($majority_party); ?></strong></p>
-        <?php else: ?>
-            <p>Analytics will be available once more than 50% of users have cast their votes.</p>
-        <?php endif; ?>
+        <div class="analytics-section">
+            <h2>Analytics</h2>
+            <?php if ($analytics_available): ?>
+                <p>The majority party based on votes so far is: <strong><?php echo htmlspecialchars($majority_party); ?></strong></p>
+            <?php else: ?>
+                <p>Analytics will be available once more than 50% of users have cast their votes.</p>
+            <?php endif; ?>
+        </div>
     </div>
 </body>
 </html>

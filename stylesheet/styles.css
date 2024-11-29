@@ -254,11 +254,72 @@ button:hover {
   background-attachment: fixed;
 }
 
-.message{
-  display: flex;
-  justify-content: center;
+/* Profile Page Specific Styles */
+.profile-page {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/profile-page.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: white;
 }
 
-.profile-page{
-  background-color: #333;
+.profile-container {
+  background-color: rgba(35, 60, 86, 0.95);
+  padding: 40px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 800px;
+  margin: 100px auto 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.profile-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: white;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
+}
+
+.profile-container p {
+  font-size: 1.2em;
+  margin: 15px 0;
+  color: #f0f0f0;
+}
+
+.profile-container strong {
+  color: #44bd32;
+  font-weight: bold;
+}
+
+.profile-container hr {
+  margin: 30px 0;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-container h2 {
+  color: white;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+.analytics-section {
+  background-color: rgba(31, 31, 31, 0.6);
+  padding: 25px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.analytics-section:hover {
+  transform: translateY(-5px);
+}
+
+.analytics-section p {
+  font-size: 1.1em;
+  line-height: 1.6;
 }

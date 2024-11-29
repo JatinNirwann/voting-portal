@@ -407,7 +407,7 @@
 				"dash": "solid",
 				"size": "m",
 				"font": "serif",
-				"text": "id INT AUTO_INCREMENT PRIMARY KEY,\n\nname VARCHAR(100) NOT NULL,\n\nage TINYINT NOT NULL,\n\ndistrict_code INT NOT NULL,\n\nparty VARCHAR(100) NOT NULL,\n\nphoto VARCHAR(255) DEFAULT 'default-image.png',\n\ndiscription VARCHAR(255);\n\nFOREIGN KEY (district_code) REFERENCES districts(district_code)",
+				"text": "id INT AUTO_INCREMENT PRIMARY KEY,\n\nname VARCHAR(100) NOT NULL,\n\nage TINYINT NOT NULL,\n\nconstituency_code INT NOT NULL,\n\nparty VARCHAR(100) NOT NULL,\n\nphoto VARCHAR(255) DEFAULT 'default-image.png',\n\ndiscription VARCHAR(255);\n\nFOREIGN KEY (district_code) REFERENCES districts(district_code)",
 				"align": "start",
 				"verticalAlign": "middle",
 				"growY": 77.33964775938068,
@@ -506,10 +506,10 @@
 				"dash": "solid",
 				"size": "m",
 				"font": "serif",
-				"text": "id INT AUTO_INCREMENT PRIMARY KEY, \n\nfull_name VARCHAR(100) NOT NULL,\n\nusername VARCHAR(50) UNIQUE NOT NULL,\n\npassword_hash VARCHAR(255) NOT NULL,\n\nvoter_id VARCHAR(12),\n\nFOREIGN KEY (voter_id) REFERENCES voters(voter_id)",
+				"text": "id INT AUTO_INCREMENT PRIMARY KEY, \n\nfull_name VARCHAR(100) NOT NULL,\n\nusername VARCHAR(50) UNIQUE NOT NULL,\n\npassword_hash VARCHAR(255) NOT NULL,\n\nvoter_id VARCHAR(12),\n\nage int,\n\nFOREIGN KEY (voter_id) REFERENCES voters(voter_id);",
 				"align": "start",
 				"verticalAlign": "middle",
-				"growY": 0,
+				"growY": 15.461455584239502,
 				"url": "",
 				"scale": 1
 			},
@@ -622,10 +622,10 @@
 				"dash": "solid",
 				"size": "m",
 				"font": "serif",
-				"text": "voter_id VARCHAR(12) PRIMARY KEY,\n\ndistrict_code INT NOT NULL,\n\nusername VARCHAR(50) UNIQUE,\n\nFOREIGN KEY (district_code) REFERENCES districts(district_code)\n\ndistrict_code  int",
+				"text": "voter_id VARCHAR(12) PRIMARY KEY,\n\ndistrict_code INT NOT NULL,\n\nusername VARCHAR(50) UNIQUE,\n\nFOREIGN KEY (district_code) REFERENCES districts(district_code),\n\nconstituency_code  int,\n\nage int ;",
 				"align": "start",
 				"verticalAlign": "middle",
-				"growY": 0,
+				"growY": 32.09725572103025,
 				"url": "",
 				"scale": 1
 			},
@@ -811,7 +811,7 @@
 			"id": "shape:y2UUvV-wLnzsIY_c4YKbx",
 			"type": "geo",
 			"props": {
-				"w": 482.2518215477344,
+				"w": 483,
 				"h": 230.11513846946417,
 				"geo": "rectangle",
 				"color": "black",
@@ -820,7 +820,7 @@
 				"dash": "solid",
 				"size": "m",
 				"font": "sans",
-				"text": "district_code INT PRIMARY KEY,\n\ndistrict_name VARCHAR(100) NOT NULL,\n\nstate VARCHAR(50) NOT NULL",
+				"text": "constituency_code INT PRIMARY KEY,\n\nconstituency_name VARCHAR(100) NOT NULL,\n\nstate VARCHAR(50) NOT NULL",
 				"align": "start",
 				"verticalAlign": "middle",
 				"growY": 0,
@@ -1139,9 +1139,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -401.917553420088,
-			"y": 917.6708135919171,
-			"lastActivityTimestamp": 1732810808284,
+			"x": 671.3706831194806,
+			"y": 856.1001987227776,
+			"lastActivityTimestamp": 1732852023510,
 			"meta": {}
 		},
 		{
@@ -1190,12 +1190,12 @@
 			"typeName": "instance"
 		},
 		{
-			"editingShapeId": "shape:oZcTaHVthbVvhxrV6RXZM",
+			"editingShapeId": "shape:cZL2l12hNO2H11t8P4PKG",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:oZcTaHVthbVvhxrV6RXZM"
+				"shape:cZL2l12hNO2H11t8P4PKG"
 			],
-			"hoveredShapeId": "shape:oZcTaHVthbVvhxrV6RXZM",
+			"hoveredShapeId": "shape:cZL2l12hNO2H11t8P4PKG",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -1205,9 +1205,9 @@
 			"typeName": "instance_page_state"
 		},
 		{
-			"x": 1018.7373396524166,
-			"y": 75.96111623680048,
-			"z": 0.49998395119627986,
+			"x": 360.0266374340001,
+			"y": -97.73864677287291,
+			"z": 0.6255591316262061,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
