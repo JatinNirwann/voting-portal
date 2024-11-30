@@ -1,8 +1,7 @@
-INSERT INTO constituency (constituency_code, constituency_name, state)
-VALUES
-(101, 'Almora', 'Uttarakhand'),
-(102, 'Chandni Chowk', 'Delhi'),
-(103, 'North Delhi', 'Delhi'),
-(104, 'Arunachal West', 'Arunachal Pradesh'),
-(105, 'Arunachal East', 'Arunachal Pradesh'),
-(106, 'Delhi West', 'Delhi');
+INSERT INTO constituency (voter_id, constituency_code, state) VALUES
+('VOT1234567', '101', 'Uttarakhand'),
+('VOT1234568', '102', 'Delhi'),
+('VOT1234569', '103', 'Delhi'),
+('VOT1234570', '104', 'Arunachal Pradesh'),
+('VOT1234571', '105', 'Arunachal Pradesh'),
+('VOT1234572', '106', 'Delhi');

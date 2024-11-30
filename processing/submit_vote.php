@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Incorrect password.");
         }
 
-
         $stmt = $conn->prepare("SELECT id FROM candidates WHERE id = ?");
         $stmt->bind_param("i", $candidateId);
         $stmt->execute();
@@ -56,19 +55,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $conn->commit();
 
-        echo "Vote submitted successfully.";
-        <script>
-            window.location.href = "thank_you.php";
-          </script>';
-    
+        // Output a success message and redirect using JavaScript
+        echo "<script>
+            console.log('Vote submitted successfully.');
+            alert('Vote submitted successfully.');
+            window.location.href = 'thank_you.php';
+        </script>";
 
     } catch (Exception $e) {
-        $conn->rollback();
-
-        echo "An internal error occurred. Please try again.";
+        error_log($e->getMessage(), 3, 'error_log.txt');
+        echo "<script>
+            console.error('Internal Error: " . $e->getMessage() . "');
+            alert('Internal Error');
+            window.location.href = 'vote.php';
+        </script>";
     }
+
 } else {
-    echo "Invalid request method.";
+    echo "<script>
+        console.error('Invalid request method.');
+        alert('Invalid request method.');
+        window.location.href = 'vote.php';
+    </script>";
 }
 
 $conn->close();

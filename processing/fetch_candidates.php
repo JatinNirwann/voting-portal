@@ -41,7 +41,7 @@ if (!$constituency_code) {
     exit();
 }
 
-$query = $conn->prepare("SELECT id, name, age, party, photo, discription FROM candidates WHERE constituency_code = ?");
+$query = $conn->prepare("SELECT id, name, age, party, photo, description FROM candidates WHERE constituency_code = ?");
 $query->bind_param("s", $constituency_code);
 $query->execute();
 $result = $query->get_result();
@@ -54,7 +54,7 @@ if ($result->num_rows > 0) {
         echo "<div class='details'>";
         echo "<p>Age: " . htmlspecialchars($candidate['age']) . "</p>";
         echo "<p>Party: " . htmlspecialchars($candidate['party']) . "</p>";
-        echo "<p>" . htmlspecialchars($candidate['discription']) . "</p>";
+        echo "<p>" . htmlspecialchars($candidate['description']) . "</p>";
         echo "</div>";
         echo "</div>";
     }
